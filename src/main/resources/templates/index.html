@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="${ventana}"></title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <link rel="icon"   href="/images/icono.jpg" type="image/png"/>
+        <meta charset="UTF-8">
+        <style>          
+            body::after {
+                content: "";
+                background: url(/images/fondo.jpg);
+                opacity: 0.6;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                z-index: -1;   
+            }
+        </style>
+    </head>
+    <body style="overflow-x:auto;">
+        <nav class="navbar navbar-expand-lg navbar-info bg-dark">
+            <a class="navbar-brand text-capitalize bg-white text-dark rounded-pill px-2 py-1" th:href="@{/}"><strong>razonar</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Listados
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-primary" th:href="@{/alumnos/listar}">Alumnos</a>
+                            <a class="dropdown-item text-primary" th:href="@{/profesores/listar}">Profesores</a>
+                            <a class="dropdown-item text-primary" th:href="@{/asignaturas/listar}">Asignaturas</a>
+                            <a class="dropdown-item text-primary" th:href="@{/sesiones/listar}">Sesiones</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br></br>
+        <h1 class="text-uppercase text-center text-dark font-weight-bold font-italic" th:text="${titulo}"></h1>
+        <br></br>
+        <div class="rounded-pill px-5 py-2 text-dark border border-dark" style="background-color:rgba(255,255,255,0.4);">
+            <h3 class="text-center font-italic"><strong>Información General</strong></h3>
+            <p align="justify" class="text-black font-italic">
+                <strong>Razonar</strong> es una academia de enseñanza fundada en el año 1997, con una variedad de profesionales de primer nivel egresados de las mejores casas de estudios del país.
+                Con un gran predisposición hacia la enseñanza en ámbitos tecnológicos y científicos, para la creación de profesionales capaces a afrontar el mundo laboral y competitivo.
+            </p>
+            <h3 class="text-center font-italic"><strong>Objetivos</strong></h3>
+            <ul class="font-italic">
+                <li>Optimizar los conocimientos de los alumnos e incentivar el interéz hacia la ciencia.</li>
+                <li>Generar profesionales de primer nivel, con renombre a nivel país.</li>
+                <li>Garantizar un ambiente ameno para emprender proyectos y comenzar invetigaciones.</li>
+                <li>Orientar a cada alumno en sus proyecciones personales.</li>
+            </ul>
+        </div>
+        <br></br>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container">
+                <table style="margin: 0 auto;">
+                    <thead class="thead-dark text-primary">
+                        <tr>
+                            <th>Contactos</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-primary">
+                        <tr>
+                            <td>Cel: 0981 583469</td>
+                        </tr>
+                        <tr>
+                            <td>Tel: 021 945 684</td>
+                        </tr>
+                        <tr>
+                            <td>email: razonarpy@razonar.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nav>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
