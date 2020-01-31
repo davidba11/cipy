@@ -36,6 +36,7 @@
                             <a class="dropdown-item text-primary" th:href="@{/profesores/listar}">Profesores</a>
                             <a class="dropdown-item text-primary" th:href="@{/asignaturas/listar}">Asignaturas</a>
                             <a class="dropdown-item text-primary" th:href="@{/sesiones/listar}">Sesiones</a>
+                            <a class="dropdown-item text-primary" th:href="@{/tutorias/listar}">Tipos de Tutorias</a>
                         </div>
                     </li>
                 </ul>
@@ -69,6 +70,18 @@
                         <small class="form-text text-danger" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></small>
                     </div>
                 </div>
+
+                <div class="form-group row"  style="width: 600px;">
+                    <label class="col-sm-2 col-form-label"><strong>Tutoria:</strong></label>
+                    <div class="col-sm-6">
+                        <select th:field="*{tutoria.codTutoria}">
+                            <option th:each="tutoria: ${tutorias}" th:value="${tutoria.codTutoria}" th:text="'('+${tutoria.codTutoria}+')'+' '+${tutoria.descripcion}">
+
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
                 <br></br>
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label"></label>

@@ -54,17 +54,17 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Codigo</th>
-                        <th>Asignatura</th>
+                        <th>Descripcion</th>
                         <th>Editar</th>
                         <th>Eliminar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="asignatura: ${asignaturas}">
-                        <td th:text="${asignatura.codAsinatura}"></td>
-                        <td th:text="${asignatura.descripcion}"></td>
-                        <td><a class="btn btn-success btn-xs" th:href="@{/asignaturas/add/} + ${asignatura.codAsinatura}" th:text="'Editar'"></a></td>
-                        <td><a class="btn btn-danger btn-xs" th:href="@{/asignaturas/delete/} + ${asignatura.codAsinatura}" th:text="'Eliminar'"></a></td>                    
+                    <tr th:each="tutoria: ${tutorias}">
+                        <td th:text="${tutoria.codTutoria}"></td>
+                        <td th:text="${tutoria.descripcion}"></td>
+                        <td><a class="btn btn-success btn-xs" th:href="@{/tutorias/add/} + ${tutoria.codTutoria}" th:text="'Editar'"></a></td>
+                        <td><a class="btn btn-danger btn-xs" th:href="@{/tutorias/delete/} + ${tutoria.codTutoria}" th:text="'Eliminar'"></a></td>                    
                     </tr>
                 </tbody>
             </table>
@@ -74,7 +74,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <a th:href="@{/asignaturas/add}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true"><b>Agregar Asignatura</b></a>                           
+                        <a th:href="@{/tutorias/add}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true"><b>Agregar Tutoria</b></a>                           
                     </td>
                 </tr>
             </tbody>

@@ -1,11 +1,134 @@
-<!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
+        <title> Form de Sesiones</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+        <link rel="icon"   href="/images/icono.jpg" type="image/png"/>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>          
+            body::after {
+                content: "";
+                background: url(/images/fondo.jpg);
+                opacity: 0.6;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                right: 0;
+                position: absolute;
+                z-index: -1;   
+            }
+        </style>
     </head>
     <body>
-        <div>TODO write content</div>
+        <nav class="navbar navbar-expand-lg navbar-info bg-dark">
+            <a class="navbar-brand text-capitalize bg-white text-dark rounded-pill px-2 py-1" th:href="@{/}"><strong>razonar</strong></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Listados
+                        </a>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-primary" th:href="@{/alumnos/listar}">Alumnos</a>
+                            <a class="dropdown-item text-primary" th:href="@{/profesores/listar}">Profesores</a>
+                            <a class="dropdown-item text-primary" th:href="@{/asignaturas/listar}">Asignaturas</a>
+                            <a class="dropdown-item text-primary" th:href="@{/sesiones/listar}">Sesiones</a>
+                            <a class="dropdown-item text-primary" th:href="@{/tutorias/listar}">Tipos de Tutorias</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container">
+            <br></br>
+            <h1 class="text-dark text-uppercase font-weight-bold font-italic Italica border border-dark border-top-0 border-right-0 border-left-0" th:text="${titulo}"></h1>
+            <br></br>
+            <form th:action="@{/sesiones/add}" th:object="${sesion}" method="post">
+                
+                <div class="form-group row"  style="width: 600px;">
+                    <label class="col-sm-2 col-form-label"><strong>Fecha:</strong></label>
+                    <div class="col-sm-6">
+                        <input type="text" th:field="*{fecha}" class="form-control" th:errorclass="'form-control alert-danger'" placeholder="AAAA-MM-DD" style="width: 300px;"/>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></small>
+                    </div>
+                </div> 
+                
+                <div class="form-group row"  style="width: 600px;">
+                    <label class="col-sm-2 col-form-label"><strong>Entrada:</strong></label>
+                    <div class="col-sm-6">
+                        <input type="time" th:field="*{horaEntrada}" class="form-control" th:errorclass="'form-control alert-danger'" style="width: 300px;"/>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('horaEntrada')}" th:errors="*{horaEntrada}"></small>
+                    </div>
+                </div>                
+                
+                <div class="form-group row"  style="width: 600px;">
+                    <label class="col-sm-2 col-form-label"><strong>Asignatura:</strong></label>
+                    <div class="col-sm-6">
+                        <select th:field="*{asignatura.codAsinatura}">
+                            <option th:each="asignatura: ${asignaturas}" th:value="${asignatura.codAsinatura}" th:text="'('+${asignatura.codAsinatura}+')'+' '+${asignatura.descripcion}">
+                                
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group row"  style="width: 600px;">
+                    <label class="col-sm-2 col-form-label"><strong>Profesor:</strong></label>
+                    <div class="col-sm-6">
+                        <select th:field="*{profesor.codProfesor}">
+                            <option th:each="profesor: ${profesores}" th:value="${profesor.codProfesor}" th:text="'('+${profesor.codProfesor}+')'+' '+${profesor.nombre}+' '+${profesor.apellido}">
+                                
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group row"  style="width: 600px;">
+                    <label class="col-sm-2 col-form-label"><strong>Salida:</strong></label>
+                    <div class="col-sm-6">
+                        <input type="time" th:field="*{horaSalida}" class="form-control" th:errorclass="'form-control alert-danger'" style="width: 300px;"/>
+                        <small class="form-text text-danger" th:if="${#fields.hasErrors('horaSalida')}" th:errors="*{horaSalida}"></small>
+                    </div>
+                </div>
+                
+                <br></br>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"></label>
+                    <div class="col-sm-6">
+                        <input type="submit" value="Guardar" class="btn btn-dark"/>
+                    </div>
+                </div>
+                <input type="hidden" th:field="*{codSesion}"/>
+            </form>
+        </div>
+        <br></br>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container">
+                <table style="margin: 0 auto;">
+                    <thead class="thead-dark text-primary">
+                        <tr>
+                            <th>Contactos</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-primary">
+                        <tr>
+                            <td>Cel: 0981 583469</td>
+                        </tr>
+                        <tr>
+                            <td>Tel: 021 945 684</td>
+                        </tr>
+                        <tr>
+                            <td>Email: razonarpy@razonar.com</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </nav>
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>
 </html>

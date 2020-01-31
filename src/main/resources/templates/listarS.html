@@ -30,15 +30,6 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-<!--                    <li class="nav-item active">
-                        <a class="nav-link text-capitalize" th:href="@{/profesores/listar}">profesores <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-capitalize" th:href="@{/alumnos/listar}">alumnos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-capitalize" th:href="@{/asignaturas/listar}">asignaturas</a>
-                    </li>-->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Listados
@@ -48,16 +39,10 @@
                             <a class="dropdown-item text-primary" th:href="@{/profesores/listar}">Profesores</a>
                             <a class="dropdown-item text-primary" th:href="@{/asignaturas/listar}">Asignaturas</a>
                             <a class="dropdown-item text-primary" th:href="@{/sesiones/listar}">Sesiones</a>
+                            <a class="dropdown-item text-primary" th:href="@{/tutorias/listar}">Tipos de Tutorias</a>
                         </div>
                     </li>
-<!--                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                    </li>-->
                 </ul>
-<!--                                <form class="form-inline my-2 my-lg-0">
-                                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                </form>-->
             </div>
         </nav>
         <br></br>
@@ -69,6 +54,7 @@
                         <th>Codigo</th>
                         <th>Asignatura</th>
                         <th>Profesor</th>
+                        <th>Fecha</th>
                         <th>Entrada</th>
                         <th>Salida</th>
                         <th>Editar</th>
@@ -78,8 +64,9 @@
                 <tbody>
                     <tr th:each="sesion: ${sesiones}">
                         <td th:text="${sesion.codSesion}"></td>
-                        <td th:text="${sesion.codAsinatura.descripcion}"></td>
-                        <td th:text="${sesion.codProfesor.nombre}"></td>
+                        <td th:text="${sesion.asignatura.descripcion}"></td>
+                        <td th:text="${sesion.profesor.nombre}+' '+${sesion.profesor.apellido}"></td>
+                        <td th:text="${sesion.fecha}"></td>
                         <td th:text="${sesion.horaEntrada}"></td>
                         <td th:text="${sesion.horaSalida}"></td>
                         <td><a class="btn btn-success btn-xs" th:href="@{/sesiones/add/} + ${sesion.codSesion}" th:text="'Editar'"></a></td>
@@ -93,7 +80,7 @@
             <tbody>
                 <tr>
                     <td>
-                        <a th:href="@{/sesioness/add}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true"><b>Agregar Sesion</b></a>                           
+                        <a th:href="@{/sesiones/add}" class="btn btn-dark btn-lg active" role="button" aria-pressed="true"><b>Agregar Sesion</b></a>                           
                     </td>
                 </tr>
             </tbody>

@@ -2,6 +2,7 @@ package com.cipy.jpa.controllers;
 
 import com.cipy.jpa.models.entity.Profesor;
 import com.cipy.jpa.models.service.IProfesorService;
+import com.cipy.jpa.models.service.ITutoriaService;
 import java.util.Map;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class ProfesorController {
     @Autowired
     private IProfesorService profesorService;
     
+    @Autowired
+    private ITutoriaService tutoriaService;
+    
     @RequestMapping(value="/listar", method=RequestMethod.GET)
     public String listar(Model model){
         model.addAttribute("titulo", "Listado de Profesores");
@@ -27,23 +31,25 @@ public class ProfesorController {
     }
     
     @RequestMapping(value="/add")
-    public String agregar(Map<String, Object> model){
+    public String agregar(Map<String, Object> map, Model model){
         Profesor profesor= new Profesor();
-        model.put("profesor", profesor);
-        model.put("titulo", "Registrar Profesor");
+        map.put("profesor", profesor);
+        map.put("titulo", "Registrar Profesor");
+        model.addAttribute("tutorias", tutoriaService.findAll());
         return "addP";
     }
     
     @RequestMapping(value="/add/{codProfesor}")
-    public String editar(@PathVariable(value="codProfesor") Integer codProfesor, Map<String, Object> model){
+    public String editar(@PathVariable(value="codProfesor") Integer codProfesor, Map<String, Object> map, Model model){
         Profesor profesor=null;
         
         if(codProfesor>0)
             profesor=profesorService.findOne(codProfesor);
         else
             return "redirect:listar";
-        model.put("profesor", profesor);
-        model.put("titulo", "Editar Profesor");
+        map.put("profesor", profesor);
+        map.put("titulo", "Editar Profesor");
+        model.addAttribute("tutorias", tutoriaService.findAll());
         return "addP";
     }
     

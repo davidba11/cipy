@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,6 +38,10 @@ public class Profesor implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "nombre")
     private String nombre;
+    
+    @JoinColumn(name = "cod_tutoria", referencedColumnName = "cod_tutoria")
+    @ManyToOne(optional = false)
+    private Tutoria tutoria;
 
     public Profesor() {
     }
@@ -43,12 +49,20 @@ public class Profesor implements Serializable {
     public Profesor(Integer codProfesor) {
         this.codProfesor = codProfesor;
     }
+//
+//    public Profesor(Integer codProfesor, String apellido, String cedula, String nombre) {
+//        this.codProfesor = codProfesor;
+//        this.apellido = apellido;
+//        this.cedula = cedula;
+//        this.nombre = nombre;
+//    }
 
-    public Profesor(Integer codProfesor, String apellido, String cedula, String nombre) {
+    public Profesor(Integer codProfesor, String apellido, String cedula, String nombre, Tutoria tutoria) {
         this.codProfesor = codProfesor;
         this.apellido = apellido;
         this.cedula = cedula;
         this.nombre = nombre;
+        this.tutoria = tutoria;
     }
 
     public Integer getCodProfesor() {
@@ -81,6 +95,14 @@ public class Profesor implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public Tutoria getTutoria() {
+        return tutoria;
+    }
+
+    public void setTutoria(Tutoria tutoria) {
+        this.tutoria = tutoria;
     }
 
     @Override

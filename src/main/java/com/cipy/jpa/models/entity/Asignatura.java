@@ -33,7 +33,7 @@ public class Asignatura implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "codAsinatura")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "asignatura")
     private List<Sesion> sesionesList;
 
     public Asignatura() {

@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 //import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "clases")
@@ -34,19 +35,33 @@ public class Sesion implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "hora_entrada")
-    @Temporal(TemporalType.TIME)
-    private Date horaEntrada;
+//    @Temporal(TemporalType.TIME)
+    private String horaEntrada;
     @Column(name = "hora_salida")
-    @Temporal(TemporalType.TIME)
-    private Date horaSalida;
+//    @Temporal(TemporalType.TIME)
+    private String horaSalida;
     @ManyToMany(mappedBy = "sesionesList")
     private List<Alumno> alumnosList;
+    @NotNull
+    @Basic(optional = false)
+    @Column(name = "fecha")
+    @DateTimeFormat(pattern="yyyy-mm-dd")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     @JoinColumn(name = "cod_asinatura", referencedColumnName = "cod_asinatura")
     @ManyToOne(optional = false)
-    private Asignatura codAsinatura;
+    private Asignatura asignatura;
     @JoinColumn(name = "cod_Profesor", referencedColumnName = "cod_Profesor")
     @ManyToOne(optional = false)
-    private Profesor codProfesor;
+    private Profesor profesor;
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
 
     public Sesion() {
     }
@@ -55,7 +70,7 @@ public class Sesion implements Serializable {
         this.codSesion = codSesion;
     }
 
-    public Sesion(Integer codSesion, Date horaEntrada) {
+    public Sesion(Integer codSesion, String horaEntrada) {
         this.codSesion = codSesion;
         this.horaEntrada = horaEntrada;
     }
@@ -68,19 +83,19 @@ public class Sesion implements Serializable {
         this.codSesion = codSesion;
     }
 
-    public Date getHoraEntrada() {
+    public String getHoraEntrada() {
         return horaEntrada;
     }
 
-    public void setHoraEntrada(Date horaEntrada) {
+    public void setHoraEntrada(String horaEntrada) {
         this.horaEntrada = horaEntrada;
     }
 
-    public Date getHoraSalida() {
+    public String getHoraSalida() {
         return horaSalida;
     }
 
-    public void setHoraSalida(Date horaSalida) {
+    public void setHoraSalida(String horaSalida) {
         this.horaSalida = horaSalida;
     }
 
@@ -93,20 +108,20 @@ public class Sesion implements Serializable {
         this.alumnosList = alumnosList;
     }
 
-    public Asignatura getCodAsinatura() {
-        return codAsinatura;
+    public Asignatura getAsignatura() {
+        return asignatura;
     }
 
-    public void setCodAsinatura(Asignatura codAsinatura) {
-        this.codAsinatura = codAsinatura;
+    public void setAsignatura(Asignatura asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public Profesor getCodProfesor() {
-        return codProfesor;
+    public Profesor getProfesor() {
+        return profesor;
     }
 
-    public void setCodProfesor(Profesor codProfesor) {
-        this.codProfesor = codProfesor;
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
     }
 
     @Override
@@ -133,5 +148,5 @@ public class Sesion implements Serializable {
     public String toString() {
         return "com.cipy.jpa.models.entity.Sesiones[ codSesion=" + codSesion + " ]";
     }
-    
+
 }

@@ -17,4 +17,22 @@ public class SesionServiceImpl implements ISesionService{
     public List<Sesion> findAll() {
         return sesionDao.findAll();
     }
+    
+    @Override
+    @Transactional
+    public void save(Sesion sesion) {
+        sesionDao.save(sesion);
+    }
+    
+    @Override
+    @Transactional(readOnly=true)
+    public Sesion findOne(Integer codSesion) {
+        return sesionDao.findOne(codSesion);
+    }
+    
+    @Override
+    @Transactional
+    public void delete(Integer codSesion) {
+        sesionDao.delete(codSesion);
+    }
 }

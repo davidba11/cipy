@@ -6,4 +6,10 @@ import java.util.List;
 public interface ISesionService {
     
     public List<Sesion> findAll();
+    
+    public void save(Sesion sesion);
+    
+    public Sesion findOne(Integer codSesion);
+    
+    public void delete(Integer codSesion);
 }

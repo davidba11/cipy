@@ -6,9 +6,10 @@ import java.util.List;
 public interface ISesionDao {
     public List<Sesion> findAll();
     
-//    public void save(Alumno alumno);
-//    
-//    public Alumno findOne(Integer codAlumno);
-//    
-//    public void delete(Integer codAlumno);
+    public void save(Sesion sesion);
+    
+    public Sesion findOne(Integer sesion);
+    
+    public void delete(Integer codSesion);
+    
 }
